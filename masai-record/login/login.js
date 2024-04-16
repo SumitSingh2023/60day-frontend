@@ -25,11 +25,15 @@ function handleSubmit(event) {
     let finder=narr.filter((ele,i)=>{
         return (narr[i].role=="HR")
     })
-
+     console.log(finder)
     if(finder =="HR"){
-        alert("login sucessfully")
+        alert("login sucessfully on Hr page")
         window.location.href="../index.html"
-    }else
+    }else{
+        alert("login sucessfully on User page")
+        window.location.href="../index.html"
+        
+    }
     // if(narr.length>0 && narr[0].role=="HR"){
     //     alert("login sucessfully")
     //     // window.location.href="../index.html"
