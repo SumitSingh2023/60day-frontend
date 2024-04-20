@@ -1,0 +1,80 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.cont{
+    width: 80vh;
+    height: 50vh;
+    border: 2px solid black;
+    margin: auto;
+    text-align: center;
+    margin-top: 20vh;
+    border-radius: 5px;
+}
+
+#display{
+    width: 70vh;
+    height: 35vh;
+    border: 2px solid red;
+    margin: auto;
+    margin-top: 5vh;
+    border-radius: 5px;
+    display: flex;
+    
+}
+
+#display>div{
+    margin-top: 10vh;
+}
+
+.input{
+    width: 14vh;
+    border-style: none;
+    background-color: rgb(52, 50, 50);
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 7px;
+    color: aqua;
+    cursor: pointer;
+    font-size: 20px;
+    margin-left: 10px;
+    text-align: center;
+    
+    
+    
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;}
+
+
+label{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: rgb(171, 3, 255);
+}
+
+.btn{
+   
+    margin-top: 15px;
+}
+
+button{
+    width: 15vh;
+    height: 5vh;
+    border-style: none;
+    cursor: pointer;
+    border: 1px solid rgb(127, 255, 0);
+    background-color: cornflowerblue;
+    border-radius: 3px;
+
+}
+
+button:hover{
+    background-color: blue;
+    color: white;
+    border-radius: 5px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
