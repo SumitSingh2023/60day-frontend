@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>JSX and Babel</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        // Your JSX code here
+
+        //simple jsx elements
+        let element = (
+            <div>
+                <p>Seize of the day</p>
+            </div>
+        )
+        ReactDOM.createRoot(document.getElementById('root')).render(element)
+
+        // Dynamic Content in jsx
+        let para = 'Seize the day'
+        let element1 = (
+            <div>
+                <p>{para}</p>
+            </div>
+        )
+        ReactDOM.createRoot(document.getElementById("root")).render(element1)
+
+        //conditional rendering
+        let load = false
+        let element3 = (
+            <div>
+                {load?<p>carpe diem</p>:<p>sumit singh</p>}
+            </div>
+        )
+        ReactDOM.createRoot(document.getElementById('root')).render(element3)
+
+    </script>
+</body>
+
+</html>
