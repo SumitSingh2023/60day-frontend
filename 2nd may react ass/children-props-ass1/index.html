@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic List Rendering</title>
+  <style>
+    .imgDiv{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Your ItemList component code will go here
+    function Gallery({children}){
+        
+        return(
+            <div className='imgDiv'>
+                {children}
+            </div>
+        )
+    }
+
+    function Image(props){
+        let {src,alt}=props
+        let imgStyle={
+            width:'200px',
+            height:'100%',
+        }
+        return(
+            <div >
+                <img style={imgStyle}  src={src} alt={alt}/>
+            </div>
+        )
+    }
+
+    function App(){
+        return(
+            <Gallery>
+                <Image src="https://images.pexels.com/photos/3225517/pexels-photo-3225517.jpeg?auto=compress&cs=tinysrgb&w=400" alt="nature"/>
+
+                <Image src="https://images.pexels.com/photos/1547813/pexels-photo-1547813.jpeg?auto=compress&cs=tinysrgb&w=400" alt="nature"/>
+
+                <Image src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=400" alt="nature"/>
+
+                <Image src="https://images.pexels.com/photos/1366909/pexels-photo-1366909.jpeg?auto=compress&cs=tinysrgb&w=400" alt="nature"/>
+
+                <Image src="https://images.pexels.com/photos/3225517/pexels-photo-3225517.jpeg?auto=compress&cs=tinysrgb&w=400" alt="nature"/>
+
+                <Image src="https://images.pexels.com/photos/1820563/pexels-photo-1820563.jpeg?auto=compress&cs=tinysrgb&w=400" alt="nature"/>
+            </Gallery>
+        )
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App/>)
+
+  </script>
+</body>
+</html>
