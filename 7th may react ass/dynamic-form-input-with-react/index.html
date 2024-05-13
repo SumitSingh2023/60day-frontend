@@ -1,53 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>dynamic input</title>
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
-  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
-  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script type="text/babel">
-    // Your  code will go here
 
-    function Form(){
-        const [hobby,setHobby] = React.useState("")
-        const [hobbyArr, setHobbyArr] = React.useState([])
-        function inputHobby(e){
-            setHobby(e.target.value)
-            console.log(hobby)
-        }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dynamic input</title>
+</head>
 
-        function show(){
-            inputHobby()
-        }
+<body>
+  <div id="root"></div>
+</body>
+<script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+<script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+  // Your  code will go here
 
-        return(
-            <div>
-                <input type="text" 
-                placeholder="Enter hobby"
-                value={hobby}
-                onChange={inputHobby}
-                />
-                <br/>
-                <br/>
-                <button onClick={show}>Submit</button>
-            </div>
-        )
+  function Form() {
+    const [hobby, setHobby] = React.useState([''])
+
+    function handleInputChange(i, e) {
+      let newHobbies = [...hobby]
+      newHobbies[i] = e.target.value;
+      setHobby(newHobbies)
     }
 
-    function App(){
-        return(
-            <div>
-                <Form/>
-            </div>
-        )
+    function addHobby() {
+      setHobby([...hobby, '']);
     }
 
-    ReactDOM.createRoot(document.getElementById('root')).render(<App/>)
-  </script>
+    const handleSubmit = () => {
+      console.log(hobby);
+    };
+
+    function deleteHobby(index) {
+      if (hobby.length > 1) {
+        let newHobbies = hobby.filter((_, i) => i !== index);
+        setHobby(newHobbies)
+      }
+
+    }
+
+    return (
+      <div>
+        {hobby.map((hobby, index) => (
+          <div key={index}>
+            <input
+              type="text"
+              value={hobby}
+              onChange={(e) => handleInputChange(index, e)}
+            />
+            {index > 0 && (
+              <button onClick={() => deleteHobby(index)}>Remove</button>
+            )}
+          </div>
+        ))}
+        <button onClick={addHobby}>Add Hobby</button>
+        <button onClick={handleSubmit}>Submit</button>
+      </div>
+    )
+  }
+
+  function App() {
+    return (
+      <div>
+        <Form />
+      </div>
+    )
+  }
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+</script>
+
 </html>
