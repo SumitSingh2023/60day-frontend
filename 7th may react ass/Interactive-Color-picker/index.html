@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Picker</title>
+    <style>
+        .btn {
+            background-color: rgb(70, 218, 36);
+            padding: 10px 30px 10px 30px;
+            border-style: none;
+            font-size: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: darkgreen;
+            color: white;
+        }
+
+        input {
+            padding: 15px;
+            border-style: none;
+            outline: none;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        h2 {
+            font-size: 40px;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+<script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    // Your  code will go here
+    function ColorInput() {
+        const [hexColor, sethexColor] = React.useState('')
+        const [displayColor, setDisplayColor] = React.useState(false)
+        const [displayError, setDisplayError] = React.useState('')
+        let styleText = {
+            backgroundColor: hexColor,
+            border: "2px solid blue",
+            width: "70%",
+            margin: "auto",
+            height: "100px",
+            marginBottom: "10px",
+            display: displayColor ? "block" : "none",
+        }
+
+        function handleSubmit() {
+            if (/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(hexColor)) {
+                setDisplayColor(true);
+                setDisplayError("")
+            } else {
+                setDisplayError("Please enter a valid HEX color code")
+                setDisplayColor(false)
+            }
+        }
+
+        function handleReset() {
+            sethexColor("")
+            setDisplayColor(false)
+            setDisplayError('')
+        }
+
+        return (
+            <div style={{
+                boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px", textAlign: "center",
+                width: "600px",
+                margin: "auto",
+                marginTop: "200px",
+                borderRadius:"5px",
+            }}>
+                <h2>Color Picker</h2>
+                <input type="text"
+                    placeholder="Enter HEX Color code"
+                    value={hexColor}
+                    onChange={(e) => {
+                        sethexColor(e.target.value)
+                    }}
+                />
+                <p style={{ color: "red" }}>{displayError}</p>
+                <br />
+                <button class="btn" onClick={handleSubmit}>Submit</button>
+                <br />
+                <br />
+                <button class="btn" onClick={handleReset}>Reset</button>
+                <br />
+                <br />
+                <br />
+                <br />
+                <div style={styleText}></div>
+            </div>
+        )
+    }
+
+    function App() {
+        return (
+            <div>
+                <ColorInput />
+            </div>
+        )
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+</script>
+
+</html>
