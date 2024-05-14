@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+<script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    // Your  code will go here
+
+    function Todo() {
+        const [todo, setTodo] = React.useState("")
+        const [todoArr, setTodoArr] = React.useState([])
+
+        function handleChange(e) {
+            setTodo(e.target.value)
+        }
+
+        function addTodo() {
+            setTodoArr([...todoArr, { id: Date.now(), Task: todo, completed: false }])
+            setTodo("")
+        }
+
+        const toggleTodo = (id) => {
+            setTodoArr(prevTodo => prevTodo.map(todo => todo.id === id ? { ...todo, completed: !todo.completed }:todo))
+        }
+
+        function remove(id){
+           setTodoArr(prevTodo=>prevTodo.filter(todo=>todo.id!==id))
+        }
+
+        return (
+            <div>
+                <input type="text" placeholder="Set Todo" value={todo} onChange={handleChange} />
+                <button onClick={addTodo}>Add Todo</button>
+
+                <ul>
+                    {todoArr.map((todo, index) => (
+                        <li key={todo.id}>
+                            <input type="checkbox"
+                                checked={todo.completed}
+                                onChange={() => toggleTodo(todo.id)}
+                            />
+                            <span>{todo.Task}</span>
+                            <button onClick={()=>remove(todo.id)}>Delete</button>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        )
+
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<Todo />)
+</script>
+
+</html>
