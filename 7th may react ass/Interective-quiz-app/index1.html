@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+    <style>
+        .main-box {
+            margin: 20px;
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        .main-box ul {
+            list-style: none;
+        }
+
+        .main-box ul li {
+            border: 1px solid red;
+            width: 300px;
+            margin: 5px;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        li:active {
+            background-color: rgb(255, 143, 192);
+        }
+
+        .submitbtn {
+            padding: 8px 12px;
+            background: rgb(105, 244, 254);
+            color: rgb(18, 19, 20);
+            border: 1px solid rgb(18, 19, 20);
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+<script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    // Your  code will go here
+
+    const root = document.getElementById("root");
+    const reactRoot = ReactDOM.createRoot(root);
+
+    // import React, { useState } from "react";
+    const Quiz = () => {
+        const [score, setScore] = React.useState(0);
+        const [result, setResult] = React.useState("");
+
+        let questions = [
+            {
+                Q: "Which of the following is used in React.js to increase performance?",
+                options: [
+                    "Virtual DOM",
+                    "Original DOM",
+                    "Both A and B",
+                    "None of the above",
+                ],
+                A: 1,
+            },
+            {
+                Q: "What is ReactJS?",
+                options: [
+                    "Server-Side framework",
+                    "User interface framework",
+                    "both A and B",
+                    "none of the above",
+                ],
+                A: 2,
+            },
+            {
+                Q: "Who created React.js?",
+                options: ["Jordan Mike", "Jorden Walke", "Tim Lee", "Jorden Lee"],
+                A: 2,
+            },
+            {
+                Q: "In which language is React.js written?",
+                options: ["Python", "JavaScript", "Java", "PHP"],
+                A: 2,
+            },
+            {
+                Q: "What is Babel?",
+                options: [
+                    "JavaScript Compiler",
+                    "JavaScript interpreter",
+                    "JavaScript Transpiler",
+                    "None of the above",
+                ],
+                A: 1,
+            },
+            {
+                Q: "Identify the command used to create a react app.",
+                options: [
+                    "npm install create-react-app",
+                    "install -g create-react-app",
+                    "npm install -g create-react-app",
+                    "none of the above",
+                ],
+                A: 3,
+            },
+            {
+                Q: "Identify the smallest building block of React.JS.",
+                options: ["Props", "Elements", "Components", "None of the above"],
+                A: 3,
+            },
+            {
+                Q: "What is ReactJS mainly used for building?",
+                options: [
+                    "Database",
+                    "Connectivity",
+                    "Design Plateform",
+                    "User Interface",
+                ],
+                A: 4,
+            },
+            {
+                Q: "ES6 stands for _________.",
+                options: [
+                    "ECMA 6",
+                    "ECMAJavaScript 6",
+                    "ECMAScript 6",
+                    "EJavaScript 6",
+                ],
+                A: 3,
+            },
+            {
+                Q: "JSX stands for __________.",
+                options: [
+                    "Javascript XML",
+                    "JSON XML",
+                    "JSON",
+                    "Javascript and AngularJS",
+                ],
+                A: 1,
+            },
+        ];
+
+        function handleClick(e, i, ans) {
+            console.log(questions[i].A);
+
+            if (ans === questions[i].A) {
+                setScore(score + 1);
+                console.log("correct");
+
+                // console.log(lock);
+            } else {
+                console.log("wrong");
+                // console.log(lock);
+            }
+        }
+
+        function submitQuiz() {
+            if (score > 5) {
+                setResult("pass");
+                root.innerHTML = null;
+                root.innerHTML = `
+            <h1>  
+                Yours Score: ${score}
+            </h1>
+            <h2>Very Good! 😍</h2>
+          `;
+            } else {
+                setResult("Try again");
+                root.innerHTML = null;
+                root.innerHTML = `
+            <h1>  
+                Yours Score: ${score}
+            </h1>
+            <h2>Try Again😥</h2>
+            
+          `;
+            }
+        }
+
+        return (
+            <>
+                {questions.map((ele, i) => (
+                    <div key={i}>
+                        <div className="main-box">
+                            <h2>
+                                {i + 1}. {ele.Q}
+                            </h2>
+                            <ul>
+                                { }
+                                <li onClick={(e) => handleClick(e, i, 1)}>
+                                    {ele.options[0]}
+                                </li>
+                                <li onClick={(e) => handleClick(e, i, 2)}>
+                                    {ele.options[1]}
+                                </li>
+                                <li onClick={(e) => handleClick(e, i, 3)}>
+                                    {ele.options[2]}
+                                </li>
+                                <li onClick={(e) => handleClick(e, i, 4)}>
+                                    {ele.options[3]}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                ))}
+                <button
+                    disabled={score > 2 ? true : false}
+                    className="submitbtn"
+                    onClick={submitQuiz}
+                >
+                    Submit
+                </button>
+            </>
+        );
+    };
+
+    reactRoot.render(<Quiz />);
+</script>
+
+</html>
