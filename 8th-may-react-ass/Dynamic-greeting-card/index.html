@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+
+    <style>
+        .card {
+            width: 120px;
+            border: 2px solid black;
+            height: 80px;
+            background-color: rgb(228, 208, 95);
+            text-align: center;
+            padding: 20px;
+            margin: 10px;
+        }
+
+        .maindiv{
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+<script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    // Your  code will go here
+    function GreetingCard({ greeting, name }) {
+        return (
+            
+            <div className="card">
+                {greeting} <span style={{color:"red"}}>{name}</span>
+            </div>
+        )
+    }
+
+    function App() {
+        let greetArr = [
+            { greeting: "happy birthday", name: "sumit" },
+            { greeting: "happy motherday", name: "somya" },
+            { greeting: "happy fatherday", name: "raju" },
+            { greeting: "congratulation", name: "raj" },
+            { greeting: "Badhai ho", name: "soham" },
+            { greeting: "God bless you", name: "naidu" },
+            { greeting: "happy Independence day", name: "sujit" },
+            { greeting: "happy republicday", name: "rohan" },
+            { greeting: "happy republicday", name: "veere" }
+        ]
+        return (
+            <div >
+                <h2>Greeting Card</h2> 
+                <ul className="maindiv">
+                    {greetArr.map((ele) => (
+                        <li key={ele.id = Math.random()} style={{listStyleType:"none"}}>
+                            <GreetingCard greeting={ele.greeting} name={ele.name} />
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        )
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />)
+</script>
+
+</html>
