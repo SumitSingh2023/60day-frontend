@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+<script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    // Your  code will go here
+    function TodoList() {
+
+        let [inputTodo, setInputTodo] = React.useState("")
+        let [todoArr, setTodoArr] = React.useState([])
+
+        function addTodo() {
+            inputTodo == "" ? alert("Enter you task") :
+                setTodoArr([...todoArr, { task: inputTodo, completed: false }])
+            setInputTodo("")
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault()
+        }
+        function deleted(index) {
+            const updateTodos = todoArr.filter((_, i) => i !== index)
+            setTodoArr(updateTodos)
+        }
+
+        function toggleComplete(index){
+            console.log(index)
+            const updateTodos=[...todoArr];
+            console.log(updateTodos)
+            updateTodos[index].completed = !updateTodos[index].completed
+            setTodoArr(updateTodos)
+        }
+
+        return (
+            <div>
+                <form onSubmit={handleSubmit}>
+                    <input type="text" value={inputTodo} onChange={(e) => {
+                        setInputTodo(e.target.value)
+                    }} />
+                    <button onClick={addTodo}>Add Todo</button>
+                </form>
+                <ul>
+                    {todoArr.map((todo, index) => (
+                        <li key={index} style={{textDecoration:todo.completed?"line-through":"none"}}>
+                            <input type="checkbox"
+                            checked={todo.completed}
+                            onChange={()=>toggleComplete(index)}/>
+                            {todo.task} 
+                            <button onClick={() => deleted(index)}>Delete</button>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        )
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<TodoList />)
+</script>
+
+</html>
