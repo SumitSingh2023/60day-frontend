@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+<script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    // Your  code will go here
+    function UserProfile({ img, name }) {
+        return (
+            <div className="user-list--item">
+                <img src={img} alt={name} />
+                <h2>{name}</h2>
+            </div>
+        );
+    }
+
+    function App() {
+        let [users, setUsers] = React.useState([
+            {
+                avatar: "https://cdn-icons-png.flaticon.com/128/2202/2202112.png",
+                first_name: "sumit",
+                last_name: "singh"
+            },
+            {
+                avatar: "https://cdn-icons-png.flaticon.com/128/4333/4333609.png",
+                first_name: "rohit",
+                last_name: "singh"
+            },
+            {
+                avatar: "https://cdn-icons-png.flaticon.com/128/456/456212.png",
+                first_name: "sonu",
+                last_name: "singh"
+            },
+            {
+                avatar: "https://cdn-icons-png.flaticon.com/128/2202/2202112.png",
+                first_name: "subham",
+                last_name: "singh"
+            },
+            {
+                avatar: "https://cdn-icons-png.flaticon.com/128/2202/2202112.png",
+                first_name: "ram",
+                last_name: "singh"
+            },
+            {
+                avatar: "https://cdn-icons-png.flaticon.com/128/16294/16294047.png",
+                first_name: "satyam",
+                last_name: "singh"
+            },
+            {
+                avatar: "https://cdn-icons-png.flaticon.com/128/4140/4140048.png",
+                first_name: "flash",
+                last_name: "singh"
+            },
+            {
+                avatar: "https://cdn-icons-png.flaticon.com/128/2202/2202112.png",
+                first_name: "deinm",
+                last_name: "singh"
+            }
+        ]);
+        let [searchInput, setSearchInput] = React.useState("")
+
+        function search() {
+        let filteredUsers = users.filter(user => {
+            return (
+                user.first_name.toLowerCase().includes(searchInput.toLowerCase()) ||
+                user.last_name.toLowerCase().includes(searchInput.toLowerCase())
+            );
+        });
+        return filteredUsers;
+    }
+        return (
+            <div className="user-list">
+                <input type="text"
+                    placeholder="Search"
+                    onChange={(e) => setSearchInput(e.target.value)} 
+                    value={searchInput}/>
+                    <button onClick={() => setUsers(search)}>Submit</button>
+                {search().map((user) => {
+                    return (
+                        <UserProfile
+                            img={user.avatar}
+                            name={`${user.first_name} ${user.last_name}`}
+                        />
+                    );
+                })}
+            </div>
+        );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+
+</script>
+
+</html>
