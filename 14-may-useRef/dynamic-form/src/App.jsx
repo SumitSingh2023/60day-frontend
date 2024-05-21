@@ -1,4 +1,5 @@
 import './App.css'
+import CustomSubmissionForm from './Components/CustomSubmissionForm'
 import DynamicForm from './Components/DynamicForm'
 import ValidiationForm from './Components/ValidiationForm'
 
@@ -8,7 +9,7 @@ function App() {
     <>
       <DynamicForm />
       <ValidiationForm />
-
+      <CustomSubmissionForm/>
     </>
   )
 }
